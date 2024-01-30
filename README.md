@@ -1,2 +1,2 @@
 # CreditChecker
-Epitech 2028 Tek2 Credit Checker
+Epitech 2027 Tek2 Credit Checker
