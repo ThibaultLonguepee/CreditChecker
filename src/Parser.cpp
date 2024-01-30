@@ -26,9 +26,10 @@ std::vector<CredCheck::Module *> CredCheck::Parser::parseModulesFromFile(std::st
         if (line == "" || !line.starts_with("#")) continue;
         std::stringstream ss(line.substr(1));
         std::string name;
-        float c, r, g, b;
-        ss >> name >> c >> r >> g >> b;
-        Module *m = new Module(name, c, sf::Color(r, g, b));
+        float c = 0.f;
+        int r = 0;
+        ss >> name >> c >> r;
+        Module *m = new Module(name, c, r);
 
         while (getline(fileStream, line)) {
             if (!line.starts_with("\t")) break;

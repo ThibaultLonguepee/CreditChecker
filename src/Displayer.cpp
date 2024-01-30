@@ -7,7 +7,8 @@
 
 #include "Displayer.hpp"
 
-CredCheck::Displayer::Displayer(std::vector<Module *> modules) : _modules(modules)
+CredCheck::Displayer::Displayer(std::vector<Module *> modules) :
+    _modules(modules), _blocks(Roadblock::feedRoadBlocks(modules))
 {
 }
 
@@ -30,7 +31,7 @@ bool CredCheck::Displayer::setup()
         _videoMode.height += _size + 2.f;
     }
     _videoMode.width += _size * 2.f;
-    _videoMode.height += _size * 2.f;
+    _videoMode.height += _size * 4.f;
 
     // Prepare the rectangle
     _rect.setOutlineColor(sf::Color(247, 249, 253));
@@ -42,9 +43,6 @@ bool CredCheck::Displayer::setup()
 
     // Prepare the text
     _text.setFont(_font);
-    _text.setCharacterSize(_size * 0.4f);
-    _text.setFillColor(sf::Color(7, 11, 21));
-    _text.setPosition(sf::Vector2f(0.f, 0.f));
     return true;
 }
 
@@ -65,6 +63,7 @@ void CredCheck::Displayer::run()
             displayModule(m, pos);
             pos.y += _size + 2.f;
         }
+        displayCredits(pos);
         _window.display();
     }
 }
@@ -77,9 +76,10 @@ void CredCheck::Displayer::pollEvents()
         if (event.type == sf::Event::Closed)
             _window.close();
         if (event.type == 10 && event.mouseButton.button == 0) {
-            unsigned int i = event.mouseButton.y / (_size + 2.f) + 2;
+            unsigned int i = event.mouseButton.y / (_size + 2.f) + 3;
             if (i >= _modules.size()) continue;
             _modules[i]->toggleSelect();
+            Roadblock::feedRoadBlocks(_modules, _blocks);
         }
     }
 }
@@ -95,16 +95,72 @@ void CredCheck::Displayer::displayProject(Project *p, sf::Vector2f pos)
     sf::FloatRect bounds;
     float width = _size * 1.5f * (p->end() - p->start() + 1);
     float x = pos.x + (p->start() * _size * 1.5f);
-    sf::Color c = p->module()->color();
-    int a = p->module()->isSelected() ? 255 : 40;
+    sf::Color c = _blocks[p->module()->roadblock()]->getColor();
+    int a = p->module()->isSelected() ? 255 : 51;
 
     _rect.setSize(sf::Vector2f(width, _size));
     _rect.setPosition(sf::Vector2f(x, pos.y));
     _rect.setFillColor(sf::Color(c.r, c.g, c.b, a));
     _window.draw(_rect);
 
+    _text.setCharacterSize(_size * 0.4f);
     _text.setFillColor(sf::Color(247, 249, 253));
     _text.setString(p->name());
     _text.setPosition(sf::Vector2f(x, pos.y));
+    _window.draw(_text);
+}
+
+void CredCheck::Displayer::displayCredits(sf::Vector2f pos)
+{
+    float y = pos.y + _size;
+    int credits = 0;
+    for (auto m : _modules) {
+        credits += m->credits() * m->isSelected();
+    }
+
+    _text.setCharacterSize(_size);
+    _text.setFillColor(sf::Color(7, 11, 21));
+    _text.setPosition(sf::Vector2f(pos.x, y));
+    _text.setString(std::to_string(credits));
+    _window.draw(_text);
+
+    sf::FloatRect bounds = _text.getGlobalBounds();
+    _text.setCharacterSize(_size * 0.5f);
+    float x = pos.x + bounds.width + _size * 0.25f;
+    _text.setPosition(sf::Vector2f(x, y + _size * 0.1f));
+    _text.setString("credits");
+    _window.draw(_text);
+
+    for (int i = 0; _blocks[i]; i++) {
+        pos.x = (_videoMode.width / 6.f) * (i + 2);
+        displayRoadblock(pos, i);
+    }
+}
+
+void CredCheck::Displayer::displayRoadblock(sf::Vector2f pos, int block)
+{
+    float y = pos.y + _size;
+    int credits = 0;
+    Roadblock *b = _blocks[block];
+
+    for (auto m : _modules) {
+        credits += m->credits() * m->isSelected() * (m->roadblock() == block);
+    }
+
+    _text.setCharacterSize(_size);
+    _text.setFillColor(b->getColor());
+    _text.setPosition(sf::Vector2f(pos.x, y));
+    _text.setString(std::to_string(credits));
+    _window.draw(_text);
+
+    sf::FloatRect bounds = _text.getGlobalBounds();
+    _text.setCharacterSize(_size * 0.4f);
+    float x = pos.x + bounds.width + _size * 0.25f;
+    _text.setPosition(sf::Vector2f(x, y + _size * 0.15f));
+    _text.setString(b->getName());
+    _window.draw(_text);
+
+    _text.setPosition(sf::Vector2f(x, y + _size * 0.6f));
+    _text.setString("/" + std::to_string(b->getRequired()));
     _window.draw(_text);
 }

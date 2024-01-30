@@ -10,6 +10,7 @@ CC		=	g++
 SRC 	=	src/Main.cpp	\
 			src/Parser.cpp	\
 			src/Displayer.cpp	\
+			src/Roadblock.cpp	\
 
 NAME	=	binary
 

@@ -15,14 +15,14 @@
 namespace CredCheck {
     class Module {
         public:
-            Module(std::string name, float creds, sf::Color color = sf::Color(60, 99, 208)) :
+            Module(std::string name, float creds, int roadblock) :
                 _name(name),
                 _credits(creds),
-                _color(color) {};
+                _roadblock(roadblock) {};
             ~Module() { for (auto p : _projects) delete p; }
             const std::string name() const { return _name; }
             float credits() const { return _credits; }
-            sf::Color color() const { return _color; }
+            int roadblock() const { return _roadblock; }
             unsigned int size() { return _projects.size(); }
             void toggleSelect() { _selected = !_selected; }
             bool isSelected() const { return _selected; }
@@ -32,7 +32,7 @@ namespace CredCheck {
         private:
             const std::string _name = "";
             const float _credits = 0;
-            const sf::Color _color = sf::Color(60, 99, 208);
+            const int _roadblock = 0;
             std::vector<Project *> _projects = {};
             bool _selected = false;
     };

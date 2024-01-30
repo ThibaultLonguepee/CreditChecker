@@ -8,6 +8,7 @@
 #ifndef DISPLAYER_HPP_
 #define DISPLAYER_HPP_
 
+#include "Roadblock.hpp"
 #include "Module.hpp"
 #include <algorithm>
 
@@ -23,8 +24,11 @@ namespace CredCheck {
             void pollEvents();
             void displayModule(Module *, sf::Vector2f pos);
             void displayProject(Project *, sf::Vector2f pos);
+            void displayCredits(sf::Vector2f pos);
+            void displayRoadblock(sf::Vector2f pos, int block);
 
             std::vector<Module *> _modules;
+            Roadblock **_blocks = nullptr;
             float _size = 40.f;
             sf::RenderWindow _window;
             sf::VideoMode _videoMode;

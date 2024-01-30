@@ -1,58 +1,59 @@
-# INNO&PRO 4
+# INNO&PRO 4 0
 | Tout le HUB, JAMs, KYT/CATs
 | HUB / 8 crédits, JAM / 2 crédits, KYT/CAT / 2 crédits
 | Je fais une prévision à 3 = 2 HUB + 1 JAM
 
-# PCPPMP 5
+# PCPPMP 5 1
 | Cumul du PCP et du PMP (Roadblock Soft Skills)
 | PCP / 2 crédits, PMP / 3 crédits
 
-# OTHERS 21
+# OTHERS 21 4
 | Ca c'est tout les autres modules, vous devriez avoir 21 crédits
 | de base grace au stage + project week.
 | OTHERS comprends: English / 3, Promoting / 2, Divesity
 
-
 | Evitez de toucher à tout ce qu'il y a en dessous :)
 
-# OOP 6 60 99 208
+# PGM 5 2
+
+# OOP 6 2
 	NanoTekSpice 0 3
 	Arcade 5 8
 	RayTracer 10 13
 
-# NWP 5 61 209 130
+# NWP 5 2
 	MyFTP 1 4
 	MyTeams 6 10
 
-# CCP 4 212 212 78
+# CCP 4 2
 	Panoramix 11 12
 	Plazza 13 15
 
-# PSU 5 216 95 95
+# PSU 5 3
 	nm/objdump 2 4
 	strace 5 7
 	ftrace 9 11
 
-# ASM 2 155 111 220
+# ASM 2 3
 	MiniLibC 0 2
 
-# FUN 5 60 99 208
+# FUN 5 3
 	Wolfram 1 2
 	ImageCompressor 4 7
 	MyPandoc 9 11
 
-# DOP 2 61 209 130
+# DOP 2 3
 	my_marvin 3 5
 	octopus 6 8
 
-# CNA 2 212 212 78
+# CNA 2 3
 	Groundhog 9 12
 	CryptoTrading 13 16
 
-# SEC 2 216 95 95
+# SEC 2 3
 	Hydra 15 18
 
-# MAT 3 155 111 220
+# MAT 3 3
 	201yams 1 2
 	202unsold 3 4
 	203hotline 5 6
@@ -63,10 +64,10 @@
 	208dowels 13 14
 	209poll 14 15
 
-# PRO 2 60 99 208
+# PRO 2 1
 	DelicateMission 5 6
 	SlideShow 9 10
 	Precise 14 15
 
-# YEP 5 61 209 130
+# YEP 5 2
 	Zappy 15 20
