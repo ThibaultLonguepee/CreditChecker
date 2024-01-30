@@ -51,7 +51,7 @@ bool CredCheck::Displayer::setup()
 
 void CredCheck::Displayer::run()
 {
-    _window.create(_videoMode, "CreditChecker Beta 0.3.1");
+    _window.create(_videoMode, "CreditChecker 1.0.0");
     _window.setFramerateLimit(60);
 
     while (_window.isOpen())

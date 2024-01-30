@@ -11,6 +11,7 @@ SRC 	=	src/Main.cpp	\
 			src/Parser.cpp	\
 			src/Displayer.cpp	\
 			src/Roadblock.cpp	\
+			src/Saver.cpp	\
 
 NAME	=	binary
 
