@@ -11,15 +11,15 @@
 
 int main(void)
 {
-    std::vector<CredCheck::Module *> modules = CredCheck::Parser::parseModulesFromFile("assets/modules");
+    std::vector<CredCheck::Module *> modules = CredCheck::Parser::parseModulesFromFile("assets/modules.data");
     if (!CredCheck::Saver::loadFromFile("save.data", modules))
-        return 84;
+        std::cout << "No valid save data file found." << std::endl;
     CredCheck::Displayer displayer(modules);
 
     if (!displayer.setup())
         return 84;
     displayer.run();
-    if (CredCheck::Saver::saveToFile("save.data", modules))
-        return 84;
+    if (!CredCheck::Saver::saveToFile("save.data", modules))
+        std::cout << "Could not create save data file." << std::endl;
     return 0;
 }
