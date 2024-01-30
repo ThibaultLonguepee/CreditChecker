@@ -21,6 +21,7 @@ namespace CredCheck {
             sf::Color getColor() const;
             int getCredits() const;
             int getRequired() const;
+            bool valid() const;
             void operator+=(int creds);
         protected:
         private:

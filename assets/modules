@@ -1,9 +1,7 @@
-# INNO&PRO 4 0
-| Tout le HUB, JAMs, KYT/CATs
-| HUB / 8 crédits, JAM / 2 crédits, KYT/CAT / 2 crédits
-| Je fais une prévision à 3 = 2 HUB + 1 JAM
+# HUB 3 0
+| Les crédits prévisionnels en HUB
 
-# PCPPMP 5 1
+# PCP+PMP 5 1
 | Cumul du PCP et du PMP (Roadblock Soft Skills)
 | PCP / 2 crédits, PMP / 3 crédits
 
@@ -71,3 +69,15 @@
 
 # YEP 5 2
 	Zappy 15 20
+
+# KC1 1 0
+	Kyt/Cat_API 2 7
+
+# KC2 1 0
+	Kyt/Cat_DataBase 8 13
+
+# JAM1 1 0
+	JAM_#1 6 6
+
+# JAM2 1 0
+	JAM_#2 12 12

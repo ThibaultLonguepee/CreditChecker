@@ -34,7 +34,7 @@ bool CredCheck::Displayer::setup()
     _videoMode.height += _size * 4.f;
 
     // Prepare the rectangle
-    _rect.setOutlineColor(sf::Color(247, 249, 253));
+    _rect.setOutlineColor(sf::Color(7, 11, 21));
     _rect.setOutlineThickness(2.f);
 
     // Prepare the font
@@ -54,7 +54,7 @@ void CredCheck::Displayer::run()
     while (_window.isOpen())
     {
         sf::Vector2f pos(_size, _size);
-        _window.clear(sf::Color(247, 249, 253));
+        _window.clear(sf::Color(7, 11, 21));
         pollEvents();
 
         for (auto m : _modules)
@@ -119,7 +119,7 @@ void CredCheck::Displayer::displayCredits(sf::Vector2f pos)
     }
 
     _text.setCharacterSize(_size);
-    _text.setFillColor(sf::Color(7, 11, 21));
+    _text.setFillColor(sf::Color(247, 249, 253));
     _text.setPosition(sf::Vector2f(pos.x, y));
     _text.setString(std::to_string(credits));
     _window.draw(_text);
@@ -140,17 +140,13 @@ void CredCheck::Displayer::displayCredits(sf::Vector2f pos)
 void CredCheck::Displayer::displayRoadblock(sf::Vector2f pos, int block)
 {
     float y = pos.y + _size;
-    int credits = 0;
     Roadblock *b = _blocks[block];
+    sf::Color c = b->getColor();
 
-    for (auto m : _modules) {
-        credits += m->credits() * m->isSelected() * (m->roadblock() == block);
-    }
-
+    _text.setFillColor(sf::Color(c.r, c.g, c.b, b->valid() * 183 + 72));
     _text.setCharacterSize(_size);
-    _text.setFillColor(b->getColor());
     _text.setPosition(sf::Vector2f(pos.x, y));
-    _text.setString(std::to_string(credits));
+    _text.setString(std::to_string(b->getCredits()));
     _window.draw(_text);
 
     sf::FloatRect bounds = _text.getGlobalBounds();

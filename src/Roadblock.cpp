@@ -28,6 +28,8 @@ CredCheck::Roadblock **CredCheck::Roadblock::feedRoadBlocks(std::vector<Module *
 
 void CredCheck::Roadblock::feedRoadBlocks(std::vector<Module *> modules, CredCheck::Roadblock **blocks)
 {
+    for (int i = 0; blocks[i]; i++)
+        blocks[i]->_credits = 0;
     for (auto m : modules)
         *blocks[m->roadblock()] += (m->credits() * m->isSelected());
 }
@@ -50,6 +52,11 @@ int CredCheck::Roadblock::getCredits() const
 int CredCheck::Roadblock::getRequired() const
 {
     return _required;
+}
+
+bool CredCheck::Roadblock::valid() const
+{
+    return _credits >= _required;
 }
 
 void CredCheck::Roadblock::operator+=(int creds)
