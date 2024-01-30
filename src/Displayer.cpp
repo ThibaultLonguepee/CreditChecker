@@ -25,9 +25,12 @@ bool CredCheck::Displayer::setup()
     for (auto m : _modules)
     {
         if (m->size() == 0) continue;
-        for (unsigned int i = 0; i < m->size(); i++)
-            if (_videoMode.width < ((*m)[i]->end() + 1) * _size * 1.5f)
+        for (unsigned int i = 0; i < m->size(); i++) {
+            if (_videoMode.width < ((*m)[i]->end() + 1) * _size * 1.5f) {
                 _videoMode.width = ((*m)[i]->end() + 1) * _size * 1.5f;
+                _width = (*m)[i]->end() + 1;
+            }
+        }
         _videoMode.height += _size + 2.f;
     }
     _videoMode.width += _size * 2.f;
@@ -48,7 +51,7 @@ bool CredCheck::Displayer::setup()
 
 void CredCheck::Displayer::run()
 {
-    _window.create(_videoMode, "CreditChecker Alpha 0.2.1");
+    _window.create(_videoMode, "CreditChecker Beta 0.3.1");
     _window.setFramerateLimit(60);
 
     while (_window.isOpen())
@@ -57,6 +60,7 @@ void CredCheck::Displayer::run()
         _window.clear(sf::Color(7, 11, 21));
         pollEvents();
 
+        displayWarnings();
         for (auto m : _modules)
         {
             if (m->size() == 0) continue;
@@ -159,4 +163,30 @@ void CredCheck::Displayer::displayRoadblock(sf::Vector2f pos, int block)
     _text.setPosition(sf::Vector2f(x, y + _size * 0.6f));
     _text.setString("/" + std::to_string(b->getRequired()));
     _window.draw(_text);
+}
+
+void CredCheck::Displayer::displayWarnings()
+{
+    int height = 0;
+    for (auto m : _modules)
+        height += m->size() > 0;
+    sf::Vector2f pos = {-_size * 0.5f, _size};
+    sf::Vector2f size = {_size * 1.5f, (_size + 2.f) * height};
+    for (int i = 0; i < _width; i++) {
+        int sameTime = 0;
+        for (auto m : _modules) {
+            if (!m->isSelected()) continue;
+            for (unsigned int j = 0; j < m->size(); j++)
+                sameTime += (*m)[j]->start() <= i && (*m)[j]->end() >= i;
+        }
+        pos += sf::Vector2f(_size * 1.5f, 0);
+        if (sameTime < 5) continue;
+        _rect.setPosition(pos);
+        _rect.setSize(size);
+        if (sameTime > 5)
+            _rect.setFillColor(sf::Color(233, 173, 141, 51));
+        else
+            _rect.setFillColor(sf::Color(233, 231, 141, 51));
+        _window.draw(_rect);
+    }
 }

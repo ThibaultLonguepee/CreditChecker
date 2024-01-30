@@ -26,7 +26,9 @@ namespace CredCheck {
             void displayProject(Project *, sf::Vector2f pos);
             void displayCredits(sf::Vector2f pos);
             void displayRoadblock(sf::Vector2f pos, int block);
+            void displayWarnings();
 
+            int _width = 0;
             std::vector<Module *> _modules;
             Roadblock **_blocks = nullptr;
             float _size = 40.f;
