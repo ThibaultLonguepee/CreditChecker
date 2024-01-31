@@ -25,7 +25,7 @@ namespace CredCheck {
             void operator+=(int creds);
         protected:
         private:
-            std::string _name = 0;
+            std::string _name = "";
             sf::Color _color = sf::Color::Black;
             int _credits = 0;
             int _required = 0;
