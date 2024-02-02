@@ -3,7 +3,7 @@ A credit planner application for Windows and Linux.\
 For {EPITECH} Tek2 2027.
 
 Go back to [home page](https://github.com/ThibaultLonguepee/CreditChecker/)
-Check out [Windows release](https://github.com/ThibaultLonguepee/CreditChecker/tree/windows_release)
+Check out [Linux release](https://github.com/ThibaultLonguepee/CreditChecker/tree/linux_release)
 
 ## Downloading
 You can download this repository as a `.zip` file using the top right button.
